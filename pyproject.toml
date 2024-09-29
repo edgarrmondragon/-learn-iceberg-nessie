@@ -1,0 +1,17 @@
+[project]
+name = "learn-nessie"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pyarrow>=17.0.0",
+    "pyiceberg[hive,s3fs]>=0.7.1",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pyarrow-stubs>=17.6",
+    "pyiceberg[sql-sqlite]",
+]
+package = false
