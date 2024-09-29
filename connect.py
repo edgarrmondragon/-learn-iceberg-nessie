@@ -1,16 +1,12 @@
-import contextlib
-
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
-from pyiceberg.exceptions import NamespaceAlreadyExistsError, NoSuchTableError
 from pyiceberg.catalog import load_catalog
 
 # Load the catalog
 catalog = load_catalog(name="rest")
 
 # Create a namespace
-with contextlib.suppress(NamespaceAlreadyExistsError):
-    catalog.create_namespace("docs_example")
+catalog.create_namespace_if_not_exists("docs_example")
 
 # Confirm the namespace was created
 ns = catalog.list_namespaces()
@@ -19,13 +15,9 @@ print(ns)
 # Load a local parquet file as a PyArrow table
 df = pq.read_table("./yellow_tripdata_2023-01.parquet")
 
-# Drop the table if it exists
-with contextlib.suppress(NoSuchTableError):
-    catalog.drop_table("docs_example.taxi_dataset")
-
 # Create a table in the catalog and append data
 print("Creating table...")
-table = catalog.create_table(
+table = catalog.create_table_if_not_exists(
     "docs_example.taxi_dataset",
     schema=df.schema,
 )
