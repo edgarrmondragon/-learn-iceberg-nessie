@@ -37,6 +37,12 @@
      rest:
        uri: http://127.0.0.1:19120/iceberg
        token: <token from a previous step>
+       # TODO: Confirm if these are truly required here, or we can delegate to Nessie
+       # https://github.com/apache/iceberg-python/issues/1028
+       # https://github.com/projectnessie/nessie/issues/9318
+       s3.endpoint: http://127.0.0.1:9002
+       s3.access-key-id: minioadmin
+       s3.secret-access-key: minioadmin
    ```
 
 1. Run the script to load data into the catalog:
