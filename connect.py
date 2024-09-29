@@ -39,6 +39,7 @@ with table.update_schema() as update_schema:
 
 # Overwrite the table with the new data
 table.overwrite(df)
+print(table.scan().to_arrow())
 print("Rows:", len(table.scan().to_arrow()))
 
 # Filter the table
