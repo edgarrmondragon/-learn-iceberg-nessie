@@ -29,6 +29,10 @@ table = catalog.create_table(
     "docs_example.taxi_dataset",
     schema=df.schema,
 )
+
+# TODO: This is currently failing with
+# AWS Error ACCESS_DENIED during CreateMultipartUpload operation: Access Denied.
+print("Appending data...")
 table.append(df)
 print("Rows:", len(table.scan().to_arrow()))
 
