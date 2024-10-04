@@ -12,6 +12,5 @@ dependencies = [
 [tool.uv]
 dev-dependencies = [
     "pyarrow-stubs>=17.6",
-    "pyiceberg[sql-sqlite]",
 ]
 package = false

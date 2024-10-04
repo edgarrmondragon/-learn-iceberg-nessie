@@ -2,10 +2,10 @@
 
 1. Clone the projectnessie/nessie repo
 
-1. Navigate to the docker directory and run the following command:
+1. Navigate to the `docker` directory and run the following command:
 
    ```bash
-   docker-compose -f catalog-auth-s3/docker-compose.yml up
+   docker compose -f catalog-auth-s3/docker-compose.yml up
    ```
 
 1. Get a token from the auth service:
@@ -37,6 +37,18 @@
      rest:
        uri: http://127.0.0.1:19120/iceberg
        token: <token from a previous step>
+       # TODO: Confirm if these are truly required here, or we can delegate to Nessie
+       # https://github.com/apache/iceberg-python/issues/1028
+       # https://github.com/projectnessie/nessie/issues/9318
+       s3.endpoint: http://127.0.0.1:9002
+       s3.access-key-id: minioadmin
+       s3.secret-access-key: minioadmin
+   ```
+
+1. Download sample data
+
+   ```
+   curl https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet -o ./yellow_tripdata_2023-01.parquet
    ```
 
 1. Run the script to load data into the catalog:
