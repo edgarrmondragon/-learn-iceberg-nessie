@@ -37,12 +37,9 @@
      rest:
        uri: http://127.0.0.1:19120/iceberg
        token: <token from a previous step>
-       # TODO: Confirm if these are truly required here, or we can delegate to Nessie
-       # https://github.com/apache/iceberg-python/issues/1028
-       # https://github.com/projectnessie/nessie/issues/9318
-       s3.endpoint: http://127.0.0.1:9002
-       s3.access-key-id: minioadmin
-       s3.secret-access-key: minioadmin
+       py-io-impl: pyiceberg.io.fsspec.FsspecFileIO
+       access-delegation: remote-signing  # https://github.com/apache/iceberg-python/pull/1033/files
+       s3.signer: S3V4RestSigner  # https://github.com/apache/iceberg-python/commit/ceeb08435c019859b9a2b8d6c2d36758d989ff51
    ```
 
 1. Download sample data
